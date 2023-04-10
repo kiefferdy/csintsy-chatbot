@@ -65,14 +65,17 @@ DEFINITIONS
 
 % Defines symptoms (preferably shuffled)
 symptom(cough).
-symptom(fever).
 symptom(chills).
+symptom(hallucinations).
 symptom(constipation).
 symptom(nausea).
+symptom(weakness).
+symptom(runny_nose).
 symptom(pus_in_stool).
 symptom(joint_pain).
 symptom(bodyache).
 symptom(anxiety).
+symptom(no_smell).
 symptom(watery_diarrhea).
 symptom(weight_loss).
 symptom(irritable).
@@ -83,14 +86,13 @@ symptom(hyperactivity).
 symptom(abdominal_cramps).
 symptom(weight_loss).
 symptom(mucosal_dryness).
+symptom(fever).
 symptom(confusion).
 symptom(increased_salivation).
 symptom(sore_throat).
-symptom(no_smell).
 symptom(headache).
 symptom(pink_eye).
 symptom(rash).
-symptom(hallucinations).
 symptom(night_sweats).
 symptom(muscle_pain).
 symptom(blood_in_stool).
@@ -98,7 +100,6 @@ symptom(feeling_thirsty).
 symptom(fatigue).
 symptom(elastosis).
 symptom(no_taste).
-symptom(weakness).
 symptom(blisters).
 symptom(pain_behind_eyes).
 symptom(diarrhea).
@@ -110,7 +111,6 @@ symptom(partial_paralysis).
 symptom(insomnia).
 symptom(feeling_unwell).
 symptom(appetite_loss).
-symptom(runny_nose).
 symptom(bloating).
 symptom(chest_pain).
 symptom(coughing_blood).
@@ -136,7 +136,7 @@ question(child, 'Are you a child younger than 5 years old?').
 question(smoker, 'Do you smoke?').
 question(had_dengue, 'Have you had dengue before?').
 question(had_respiratory_infection, 'Have you had a respiratory infection recently?').
-question(weak_immunity, 'Do you have a weakened immune system?')
+question(weak_immunity, 'Do you have a weakened immune system?').
 question(low_oxygen, 'Measure your blood oxygen. Is it low?').
 question(low_bp, 'Measure your blood pressure. Is it low?').
 question(rapid_heart, 'Measure your heart rate. Is it high?').
