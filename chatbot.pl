@@ -151,7 +151,7 @@ question(pink_eye, 'Examine eye. Is there swelling and/or redness?').
 confirm(tuberculosis, [child, young, exposure]).
 confirm(typhoid_fever, []).
 confirm(dengue, [had_dengue]).
-confirm(flu, [child, old]).
+confirm(flu, []).
 confirm(stomach_flu, []).
 confirm(cholera, [low_bp, rapid_heart]).
 confirm(rabies, [animal_wound]).
