@@ -65,99 +65,101 @@ DEFINITIONS
 
 % Defines symptoms (preferably shuffled)
 symptom(cough).
-symptom(chest_pain).
-symptom(runny_nose).
-symptom(sore_throat).
-symptom(weak).
-symptom(appetite_loss).
-symptom(fatigue).
-symptom(confusion).
-symptom(hard_swallow).
-symptom(irritable).
-symptom(nausea).
-symptom(headache).
-symptom(bodyache).
-symptom(abdominal_pain).
-symptom(abdominal_cramps).
-symptom(stomach_pain).
-symptom(muscle_pain).
-symptom(joint_pain).
-symptom(rash).
-symptom(colds).
-symptom(hard_breathe).
+symptom(fever).
 symptom(chills).
-symptom(diarrhea).
-symptom(watery_diarrhea).
-symptom(vomiting).
-symptom(no_taste).
-symptom(thirst).
-symptom(leg_cramps).
-symptom(rapid_heart).
-symptom(loss_skin_elasticity).
-symptom(dry_mucous_membrane).
-symptom(low_bp).
-symptom(bloating).
-symptom(bloody_poo).
-symptom(pus_poo).
-symptom(pain_behind_eyes).
-symptom(swollen_glands).
-symptom(had_dengue).
 symptom(constipation).
-symptom(night_sweats).
-symptom(blood_cough).
-symptom(phlegm).
-symptom(weight_loss).
-symptom(blisters).
-symptom(insomnia).
+symptom(nausea).
+symptom(pus_in_stool).
+symptom(joint_pain).
+symptom(bodyache).
 symptom(anxiety).
-symptom(partial_paralysis).
-symptom(hyperactivity).
-symptom(hallucinations).
-symptom(more_saliva).
+symptom(watery_diarrhea).
 symptom(weight_loss).
+symptom(irritable).
+symptom(difficulty_breathing).
+symptom(abdominal_pain).
+symptom(vomiting).
+symptom(hyperactivity).
+symptom(abdominal_cramps).
+symptom(weight_loss).
+symptom(mucosal_dryness).
+symptom(confusion).
+symptom(increased_salivation).
+symptom(sore_throat).
+symptom(no_smell).
+symptom(headache).
 symptom(pink_eye).
-symptom(feel_unwell).
+symptom(rash).
+symptom(hallucinations).
+symptom(night_sweats).
+symptom(muscle_pain).
+symptom(blood_in_stool).
+symptom(feeling_thirsty).
+symptom(fatigue).
+symptom(elastosis).
+symptom(no_taste).
+symptom(weakness).
+symptom(blisters).
+symptom(pain_behind_eyes).
+symptom(diarrhea).
+symptom(rapid_heart).
+symptom(leg_cramps).
+symptom(swollen_glands).
+symptom(phlegm).
+symptom(partial_paralysis).
+symptom(insomnia).
+symptom(feeling_unwell).
+symptom(appetite_loss).
+symptom(runny_nose).
+symptom(bloating).
+symptom(chest_pain).
+symptom(coughing_blood).
+symptom(difficulty_swallowing).
+symptom(common_cold).
 
 % Defines diseases and their symptoms
-disease(tuberculosis, [cough, fever, weak, night_sweats, chest_pain, weight_loss, appetite_loss, blood_cough, phlegm]).
-disease(typhoid_fever, [fever, weak, stomach_pain, headache, diarrhea, constipation, cough, appetite_loss, rash]).
+disease(tuberculosis, [cough, fever, weakness, night_sweats, chest_pain, weight_loss, appetite_loss, coughing_blood, phlegm]).
+disease(typhoid_fever, [fever, weakness, abdominal_pain, headache, diarrhea, constipation, cough, appetite_loss, rash]).
 disease(dengue, [fever, headache, pain_behind_eyes, muscle_pain, joint_pain, nausea, vomiting, swollen_glands, rash]).
-disease(flu, [fever, chills, cough, sore_throat, colds, muscle_pain, bodyache, headache, fatigue, vomiting, diarrhea]).
-disease(stomach_flu, [fever, appetite_loss, bloating, nausea, vomiting, stomach_pain, abdominal_pain, abdominal_cramps, diarrhea, blood_poo, pus_poo, feel_unwell]).
-disease(cholera, [diarrhea, watery_diarrhea, vomiting, thirst, leg_cramps, irritable, loss_skin_elasticity, dry_mucous_membrane]).
-disease(rabies, [insomnia, anxiety, confusion, partial_paralysis, hyperactivity, irritable, hallucinations, more_saliva, hard_swallow]).
-disease(pneumonia, [fever, cough, chest_pain, phlegm, blood_cough, chills, hard_breathe, appetite_loss, fatigue, nausea, vomiting, confusion]).
-disease(covid, [fever, colds, sore_throat, cough, no_taste, no_smell, hard_breathe, chills, headache, chest_pain, pink_eye, nausea, vomiting, diarrhea, rash]).
-disease(hand_foot_mouth, [fever, sore_throat, feel_unwell, rash, irritable, appetite_loss]).
+disease(flu, [fever, chills, cough, sore_throat, common_cold, muscle_pain, bodyache, headache, fatigue, vomiting, diarrhea]).
+disease(stomach_flu, [fever, appetite_loss, bloating, nausea, vomiting, abdominal_pain, abdominal_cramps, diarrhea, blood_in_stool, pus_in_stool, feeling_unwell]).
+disease(cholera, [diarrhea, watery_diarrhea, vomiting, feeling_thirsty, leg_cramps, irritable, elastosis, mucosal_dryness]).
+disease(rabies, [insomnia, anxiety, confusion, partial_paralysis, hyperactivity, irritable, hallucinations, increased_salivation, difficulty_swallowing]).
+disease(pneumonia, [fever, cough, chest_pain, phlegm, coughing_blood, chills, difficulty_breathing, appetite_loss, fatigue, nausea, vomiting, confusion]).
+disease(covid, [fever, common_cold, sore_throat, cough, no_taste, no_smell, difficulty_breathing, chills, headache, chest_pain, pink_eye, nausea, vomiting, diarrhea, rash]).
+disease(hand_foot_mouth, [fever, sore_throat, feeling_unwell, rash, irritable, appetite_loss]).
 
 % Defines diagnostic tests or other information associated with the illness
-question(old, 'Are you old?').
-question(young, 'Are you a young adult/adolescent (less than 24 yrs old)?').
-question(child, 'Are you a child?').
+question(young_adult, 'Are you a young adult/adolescent (less than 24 years old)?').
+question(young_old, 'Are you an infant, young child, or a senior older than 65?').
+question(child, 'Are you a child younger than 5 years old?').
 question(smoker, 'Do you smoke?').
 question(had_dengue, 'Have you had dengue before?').
-
+question(had_respiratory_infection, 'Have you had a respiratory infection recently?').
+question(weak_immunity, 'Do you have a weakened immune system?')
 question(low_oxygen, 'Measure your blood oxygen. Is it low?').
 question(low_bp, 'Measure your blood pressure. Is it low?').
 question(rapid_heart, 'Measure your heart rate. Is it high?').
-
 question(antigen_positive, 'Perform a rapid antigen test. Is the result positive?').
 question(animal_wound, 'Have you been bitten or scratched by an animal?').
-question(exposure, 'Have you been exposed to sick people?').
-question(blister, 'Examine mouth. Are there any painful, red, blister-like lesions?').
-question(pink_eye, 'Examine eye. Is there swelling and/or redness?').
+question(animal_exposure, 'Are you frequently exposed to stray dogs?').
+question(tb_exposure, 'Have you been exposed to people with tuberculosis recently?').
+question(flu_exposure, 'Have you been exposed to people exhibiting flu symptoms recently?').
+question(covid_exposure, 'Have you been exposed to people exhibiting COVID symptoms recently?').
+question(exposed, 'Are you frequently in crowded areas or congregate settings?').
+question(poor_sanitation, 'Do you live in an area with poor sanitation and hygiene?').
 
 % Defines which information can be used to confirm which disease
-confirm(tuberculosis, [child, young, exposure]).
-confirm(typhoid_fever, []).
-confirm(dengue, [had_dengue]).
-confirm(flu, [child, old]).
-confirm(stomach_flu, []).
+confirm(tuberculosis, [weak_immunity, smoker, tb_exposure, exposed]).
+confirm(typhoid_fever, [poor_sanitation]).
+confirm(dengue, [poor_sanitation, had_dengue]).
+confirm(flu, [flu_exposure]).
+confirm(stomach_flu, [poor_sanitation]).
 confirm(cholera, [low_bp, rapid_heart]).
-confirm(rabies, [animal_wound]).
-confirm(pneumonia, [old, smoker, low_oxygen, exposure]).
-confirm(covid, [antigen_positive, exposure]).
-confirm(hand_foot_mouth, [blister, child]).
+confirm(rabies, [animal_exposure, animal_wound]).
+confirm(pneumonia, [young_old, smoker, low_oxygen, had_respiratory_infection]).
+confirm(covid, [antigen_positive, covid_exposure]).
+confirm(hand_foot_mouth, [child, poor_sanitation]).
 
 /*
 RULES
