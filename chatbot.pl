@@ -241,7 +241,8 @@ conclude(Disease) :-
     length(DiseaseInfo, I),
     ((H >= 1, H < I); (H =:= 1, I =:= 1)), 
     capitalize_first_letter(Disease, DiseaseC),
-    write(DiseaseC), write(' is likely your disease. Please consult a doctor.')
+    write(DiseaseC), write(' is likely your disease. Please consult a doctor.'),
+    cleanup
     ;
     user_info(Information),
     confirm(Disease, DiseaseInfo),
@@ -249,7 +250,8 @@ conclude(Disease) :-
     length(DiseaseInfo, I),
     H > 1, H =:= I,
     capitalize_first_letter(Disease, DiseaseC),
-    write(DiseaseC), write(' is indeed most likely your disease. Please consult a doctor.')
+    write(DiseaseC), write(' is indeed most likely your disease. Please consult a doctor.'),
+    cleanup
     ;
     user_info(Information),
     confirm(Disease, DiseaseInfo),
@@ -257,12 +259,30 @@ conclude(Disease) :-
     length(DiseaseInfo, I),
     H =:= 0, I >= 1,
     capitalize_first_letter(Disease, DiseaseC),
-    write(DiseaseC), write(' may not actually be your disease. Please consult a doctor.')
+    write(DiseaseC), write(' may not actually be your disease. Please consult a doctor.'),
+    cleanup
     ;
     confirm(Disease, DiseaseInfo),
     length(DiseaseInfo, I),
     I =:= 0,
-    write('Verifying whether or not you have '), write(Disease), write(' requires laboratory tests. Please consult a doctor and refer to a large medical facility.').
+    write('Verifying whether or not you have '), write(Disease), write(' requires laboratory tests. Please consult a doctor and refer to a large medical facility.'),
+    cleanup.
+
+% Clears up the lists
+cleanup :-
+    user_info(A),
+    user_symptoms(B),
+    rejected_info(C),
+    rejected_symptoms(D),
+    retract(user_info(A)),
+    retract(user_symptoms(B)),
+    retract(rejected_info(C)),
+    retract(rejected_symptoms(D)),
+    assert(user_info([])),
+    assert(user_symptoms([])),
+    assert(rejected_info([])),
+    assert(rejected_symptoms([])),
+    nl, nl, write('Thanks for using our chat bot. To use it again, run "diagnose".').
 
 % Runs the program upon consultation by calling diagnose/0
 :- diagnose.
