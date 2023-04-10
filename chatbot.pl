@@ -1,22 +1,24 @@
 /*
 CSINTSY MCO 2: Chat Bot
-To start the program, run 'diagnose'.
-*/
-
-/*
-FUNCTIONS AND UTILITIES
 */
 
 % Import libraries
 :- use_module(library(lists)).
 
+/*
+FUNCTIONS AND UTILITIES
+*/
+
 % Declares the global lists of user symptoms and symptoms the user does not have
 :- dynamic user_symptoms/1.
 user_symptoms([]).
+
 :- dynamic rejected_symptoms/1.
 rejected_symptoms([]).
+
 :- dynamic user_info/1.
 user_info([]).
+
 :- dynamic rejected_info/1.
 rejected_info([]).
 
@@ -49,6 +51,13 @@ add_to_rejected_info(Element) :-
 count_matching_items(List1, List2, Count) :-
     findall(Item, (member(Item, List1), member(Item, List2)), MatchingItems),
     length(MatchingItems, Count).
+
+% Capitalize the first letter of a string for grammatical purposes
+capitalize_first_letter(String, Capitalized) :-
+    sub_atom(String, 0, 1, _, FirstChar),
+    upcase_atom(FirstChar, CapitalizedFirstChar),
+    sub_atom(String, 1, _, 0, RestOfString),
+    atom_concat(CapitalizedFirstChar, RestOfString, Capitalized).
 
 /*
 DEFINITIONS
@@ -120,6 +129,7 @@ MAIN
 
 % Ask questions and determine diagnosis
 diagnose :-
+    % Checks for matching symptoms
     (
         available(X),
         write('Do you have the following symptom: '), write(X), write('? Answer yes/no: '), nl,
@@ -129,8 +139,35 @@ diagnose :-
         ;
         probable_diseases(Y, N, M),
         write('Based on your symptoms, you may have '), write(Y), write('.'), nl,
-        write('You are experiencing '), write(N), write(' out of '), write(M), write(' of its possible symptoms.'), nl,
+        write('You are experiencing '), write(N), write(' out of '), write(M), write(' of its possible symptoms.'), nl, nl,
+        write('Let\'s try to confirm your disease...'), nl,
         verify(Y)
+    )
+    ;
+    % Backtracks from verify/1 and determines the accuracy of the diagnosis
+    (
+        user_info(Information),
+        confirm(Y, DiseaseInfo),
+        count_matching_items(Information, DiseaseInfo, H),
+        length(DiseaseInfo, I),
+        H >= 1, H < I,
+        capitalize_first_letter(Y, YC),
+        write(YC), write(' is likely your disease. Please consult a doctor.')
+        ;
+        user_info(Information),
+        confirm(Y, DiseaseInfo),
+        count_matching_items(Information, DiseaseInfo, H),
+        length(DiseaseInfo, I),
+        H =:= I,
+        capitalize_first_letter(Y, YC),
+        write(YC), write(' is indeed most likely your disease. Please consult a doctor.')
+        ;
+        user_info(Information),
+        confirm(Y, DiseaseInfo),
+        count_matching_items(Information, DiseaseInfo, H),
+        H =:= 0,
+        capitalize_first_letter(Y, YC),
+        write(YC), write(' may not actually be your disease. Please consult a doctor.')
     )
     ;
     % If no diagnosis is found
@@ -146,3 +183,6 @@ verify(Disease) :-
     verify(Disease)
     ;
     fail.
+
+% Runs the program upon consultation by calling diagnose/0
+:- diagnose.
