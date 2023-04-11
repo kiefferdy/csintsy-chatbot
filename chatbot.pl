@@ -215,14 +215,32 @@ diagnose :-
         diagnose
         ;
         probable_diseases(Y, N, M),
+        user_symptoms(Symptoms),
+        length(Symptoms, S),
+        S > 1,
         write('Based on your symptoms, you may have '), write(Y), write('.'), nl,
         write('You are experiencing '), write(N), write(' out of '), write(M), write(' of its possible symptoms.'), nl, nl,
         write('Let\'s try to confirm your disease...'), nl,
         verify(Y)
     )
     ;
-    % If no diagnosis is found
-    write('Sorry, we could not determine a diagnosis based on your symptoms. Please consult a doctor.'), nl.
+    % If too few symptoms match
+    user_symptoms(Symptoms),
+    length(Symptoms, S),
+    S =:= 1,
+    write('You have too few symptoms to be diagnosed a disease. Please consult a doctor.'), nl,
+    cleanup
+    ;
+    % If user has no symptoms
+    user_symptoms(Symptoms),
+    length(Symptoms, S),
+    S =:= 0,
+    write('You are not exhibiting any symptoms, so you do not seem to have a disease. If you feel unwell, however, please consult a doctor.'), nl,
+    cleanup
+    ;
+    % Error
+    write('Sorry, we could not determine a diagnosis based on your symptoms. Please consult a doctor.'), nl,
+    cleanup.
 
 % Check the likelihood of the initial diagnosis
 verify(Disease) :-
@@ -243,7 +261,7 @@ conclude(Disease) :-
     length(DiseaseInfo, I),
     ((H >= 1, H < I); (H =:= 1, I =:= 1)), 
     capitalize_first_letter(Disease, DiseaseC),
-    write(DiseaseC), write(' is likely your disease. Please consult a doctor.'),
+    write(DiseaseC), write(' is likely your disease. Please consult a doctor.'), nl,
     cleanup
     ;
     user_info(Information),
@@ -252,7 +270,7 @@ conclude(Disease) :-
     length(DiseaseInfo, I),
     H > 1, H =:= I,
     capitalize_first_letter(Disease, DiseaseC),
-    write(DiseaseC), write(' is indeed most likely your disease. Please consult a doctor.'),
+    write(DiseaseC), write(' is indeed most likely your disease. Please consult a doctor.'), nl,
     cleanup
     ;
     user_info(Information),
@@ -261,13 +279,13 @@ conclude(Disease) :-
     length(DiseaseInfo, I),
     H =:= 0, I >= 1,
     capitalize_first_letter(Disease, DiseaseC),
-    write(DiseaseC), write(' may not actually be your disease. Please consult a doctor.'),
+    write(DiseaseC), write(' may not actually be your disease. Please consult a doctor.'), nl,
     cleanup
     ;
     confirm(Disease, DiseaseInfo),
     length(DiseaseInfo, I),
     I =:= 0,
-    write('Verifying whether or not you have '), write(Disease), write(' requires laboratory tests. Please consult a doctor and refer to a large medical facility.'),
+    write('Verifying whether or not you have '), write(Disease), write(' requires laboratory tests. Please consult a doctor and refer to a large medical facility.'), nl,
     cleanup.
 
 % Clears up the lists
