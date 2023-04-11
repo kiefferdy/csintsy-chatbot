@@ -228,18 +228,21 @@ diagnose :-
     user_symptoms(Symptoms),
     length(Symptoms, S),
     S =:= 1,
-    write('You have too few symptoms to be diagnosed a disease. Please consult a doctor.'), nl,
+    write('You have too few symptoms to be diagnosed a disease, or your disease may not be in my database.'), nl,
+    write('Please consult a doctor or refer to a large medical facility.'), nl,
     cleanup
     ;
     % If user has no symptoms
     user_symptoms(Symptoms),
     length(Symptoms, S),
     S =:= 0,
-    write('You are not exhibiting any symptoms, so you do not seem to have a disease. If you feel unwell, however, please consult a doctor.'), nl,
+    write('I cannot determine a diagnosis as you are not exhibiting any of the symptoms in my database.'), nl,
+    write('You may not have a disease, but if you feel unwell, please consult a doctor or refer to a large medical facility.'), nl,
     cleanup
     ;
     % Error
-    write('Sorry, we could not determine a diagnosis based on your symptoms. Please consult a doctor.'), nl,
+    write('Sorry, I could not determine a proper diagnosis.'), nl,
+    write('Please consult a doctor or refer to a large medical facility.'), nl,
     cleanup.
 
 % Check the likelihood of the initial diagnosis
@@ -261,7 +264,8 @@ conclude(Disease) :-
     length(DiseaseInfo, I),
     ((H >= 1, H < I); (H =:= 1, I =:= 1)), 
     capitalize_first_letter(Disease, DiseaseC),
-    write(DiseaseC), write(' is likely your disease. Please consult a doctor.'), nl,
+    write(DiseaseC), write(' is likely your disease.'), nl,
+    write('Please refer to a large medical facility to verify this diagnosis.'), nl,
     cleanup
     ;
     user_info(Information),
@@ -270,7 +274,8 @@ conclude(Disease) :-
     length(DiseaseInfo, I),
     H > 1, H =:= I,
     capitalize_first_letter(Disease, DiseaseC),
-    write(DiseaseC), write(' is indeed most likely your disease. Please consult a doctor.'), nl,
+    write(DiseaseC), write(' is indeed most likely your disease.'), nl,
+    write('Please seek treatment or refer to a large medical facility to further verify this diagnosis.'), nl,
     cleanup
     ;
     user_info(Information),
@@ -279,13 +284,15 @@ conclude(Disease) :-
     length(DiseaseInfo, I),
     H =:= 0, I >= 1,
     capitalize_first_letter(Disease, DiseaseC),
-    write(DiseaseC), write(' may not actually be your disease. Please consult a doctor.'), nl,
+    write(DiseaseC), write(' may not actually be your disease.'), nl,
+    write('To get an accurate diagnosis, please refer to a large medical facility.'), nl,
     cleanup
     ;
     confirm(Disease, DiseaseInfo),
     length(DiseaseInfo, I),
     I =:= 0,
-    write('Verifying whether or not you have '), write(Disease), write(' requires laboratory tests. Please consult a doctor and refer to a large medical facility.'), nl,
+    write('Verifying whether or not you have '), write(Disease), write(' requires laboratory tests.'), nl,
+    write('Please consult a doctor and refer to a large medical facility.'), nl,
     cleanup.
 
 % Clears up the lists
@@ -302,7 +309,10 @@ cleanup :-
     assert(user_symptoms([])),
     assert(rejected_info([])),
     assert(rejected_symptoms([])),
-    nl, nl, write('Thanks for using our chat bot. To use it again, run "diagnose".').
+    nl, nl, write('Thanks for using Medical Expert System! To use it again, run "diagnose".').
 
-% Runs the program upon consultation by calling diagnose/0
-:- diagnose.
+% Runs the program upon consultation by calling diagnose/0 and prints welcome message
+:- 
+    write('Welcome to the Medical Expert System!'), nl,
+    write('Let\'s get started.'), nl, nl,
+    diagnose.
