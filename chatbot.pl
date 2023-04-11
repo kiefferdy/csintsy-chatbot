@@ -309,10 +309,18 @@ cleanup :-
     assert(user_symptoms([])),
     assert(rejected_info([])),
     assert(rejected_symptoms([])),
-    nl, nl, write('Thanks for using Medical Expert System! To use it again, run "diagnose".').
+    nl, nl, write('Thanks for using Medical Expert System! To use it again, type \'yes\': '), nl,
+    read(Response),
+    (Response == 'yes' -> diagnose; goodbye).
+
+% Upon quit
+goodbye :-
+    write('Goodbye!').
 
 % Runs the program upon consultation by calling diagnose/0 and prints welcome message
-:- 
+main :-
     write('Welcome to the Medical Expert System!'), nl,
     write('Let\'s get started.'), nl, nl,
     diagnose.
+
+:- main.
